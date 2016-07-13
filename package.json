@@ -1,0 +1,36 @@
+{
+  "name": "pokemon-legality-checker",
+  "version": "0.1.0",
+  "description": "Checks whether a given Pokémon is legal",
+  "main": "src/pokemon-legality-checker.js",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "mocha"
+  },
+  "files": [
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/porygonco/pokemon-legality-checker.git"
+  },
+  "keywords": [
+    "pokemon",
+    "porygonco",
+    "porybox",
+    "pk6"
+  ],
+  "author": "porygonco",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/porygonco/pokemon-legality-checker/issues"
+  },
+  "homepage": "https://github.com/porygonco/pokemon-legality-checker#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dirty-chai": "^1.2.2",
+    "eslint": "^3.0.1",
+    "mocha": "^2.5.3"
+  }
+}

@@ -1,18 +1,31 @@
+/* eslint-env mocha */
 'use strict';
+const fs = require('fs');
 const expect = require('chai').use(require('dirty-chai')).expect;
+const pk6parse = require('pk6parse');
 
-const legalityChecker = require('..');
+const legalityCheck = require('..');
 
 describe('pokemon-legality-checker', () => {
-  it('upholds the laws of logic (placeholder test, please replace)', () => {
-    expect(true).to.be.true();
-    expect(false).to.be.false();
-    expect(true).not.to.be.false();
-    expect(0).to.equal(0);
-    expect(0).to.not.equal(1);
+  describe('checking legal Pokémon', () => {
+    fs.readdirSync(`${__dirname}/pk6/legal`).filter(filename => filename.endsWith('.pk6')).forEach(filename => {
+      it(`should classify ${filename} as legal`, () => {
+        const parsedFile = pk6parse.parseFile(`${__dirname}/pk6/legal/${filename}`, {parseNames: true});
+        expect(legalityCheck(parsedFile)).to.eql(
+          {isLegal: true, reason: null},
+          `Incorrectly classifies the legal Pokémon ${filename} as illegal`
+        );
+      });
+    });
   });
-  it('is a function', () => {
-    // (we can make it something other than a function if we come up with a better API)
-    expect(legalityChecker).to.be.a('function');
+  describe('checking illegal Pokémon', () => {
+    fs.readdirSync(`${__dirname}/pk6/illegal`).filter(filename => filename.endsWith('.pk6')).forEach(filename => {
+      it(`should classify ${filename} as illegal`, () => {
+        const parsedFile = pk6parse.parseFile(`${__dirname}/pk6/illegal/${filename}`, {parseNames: true});
+        const check = legalityCheck(parsedFile);
+        expect(check.isLegal).to.be.false(`Incorrectly classifies the illegal Pokémon ${filename} as legal`);
+        expect(check.reason).to.be.a('string');
+      });
+    });
   });
 });

@@ -3,7 +3,12 @@ const fs = require('fs');
 const _ = require('lodash');
 const legalityChecks = fs.readdirSync(`${__dirname}/checks`)
   .filter(filename => filename.endsWith('.js'))
-  .map(filename => require(`./checks/${filename}`));
+  .map(filename => {
+    const check = require(`./checks/${filename}`);
+    if (!_.isFunction(check.test)) throw new TypeError(`The check ${filename} is missing a 'test' function property`);
+    if (!_.isString(check.description)) throw new TypeError(`The check ${filename} is missing a 'description' string property`);
+    return check;
+  });
 
 module.exports = pkmn => {
   const failedCheck = legalityChecks.filter(check => matchesFilter(pkmn, check.filter)).find(check => !check.test(pkmn));

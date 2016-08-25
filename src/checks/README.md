@@ -4,7 +4,7 @@ Each check should have two exports:
 
 * `test: function (pkmnData) --> boolean`
 
-The function that gets called to check a file. `pkmn` is parsed pk6 data. Should return a truthy value if the check passes, and a falsy value if the check fails.
+The function that gets called to check a file. `pkmn` is parsed pk6 data ([sample](https://gist.github.com/Raia/ac7c4fd3b50f751446659180e1ea375a)). Should return a truthy value if the check passes, and a falsy value if the check fails.
 
 A Pokémon is considered to be legal iff all checks pass.
 

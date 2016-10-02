@@ -4,7 +4,9 @@
 
 In development; should not be considered stable yet.
 
-To install:
+## Installation
+
+Make sure you're using Node 6.0.0 or above.
 
 ```bash
 $ npm install pokemon-legality-checker

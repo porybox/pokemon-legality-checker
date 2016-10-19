@@ -12,6 +12,10 @@ A Pokémon is considered to be legal iff all checks pass.
 
 A description of what the check is testing for. This will get reported as the failure reason if the check fails.
 
+* `field: string`
+
+This is the field on the pokemon that the check is related to. For example, 'ball', 'gender', etc.
+
 ---
 
 A check can also have the following optional properties:

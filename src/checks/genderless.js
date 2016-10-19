@@ -1,5 +1,6 @@
 module.exports = {
   description: 'Genderless Pokémon must have no gender',
+  field: 'gender',
   filter (pkmn) {
     return [81, 82, 100, 101, 120, 121, 132, 137, 144, 145, 146, 150, 151,
         201, 233, 243, 244, 245, 249, 250, 251, 292, 337, 338, 343,

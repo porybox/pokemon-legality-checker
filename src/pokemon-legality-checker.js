@@ -11,8 +11,9 @@ const legalityChecks = fs.readdirSync(`${__dirname}/checks`)
   });
 
 module.exports = pkmn => {
-  const failedCheck = legalityChecks.filter(check => matchesFilter(pkmn, check.filter)).find(check => !check.test(pkmn));
-  return failedCheck ? {isLegal: false, reason: failedCheck.description} : {isLegal: true, reason: null};
+  const failedChecks = legalityChecks.filter(check => matchesFilter(pkmn, check.filter)).filter(check => !check.test(pkmn));
+  const errors = failedChecks.map(check => ({field: check.field, message: check.description}));
+  return {isLegal: failedChecks.length === 0, errors};
 };
 
 function matchesFilter (pkmn, filter) {

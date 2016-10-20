@@ -19,8 +19,8 @@ inquirer.prompt([
     type: 'input',
     name: 'offset',
     message: 'Enter the byte offset of the value that should be updated.',
-    filter: offset => parseInt(offset),
-    validate: result => !Number.isNaN(result) && result >= 8 && result < 260 || 'Offset must be an integer between 8 and 259'
+    filter: (offset) => parseInt(offset),
+    validate: (result) => !Number.isNaN(result) && result >= 8 && result < 260 || 'Offset must be an integer between 8 and 259'
   },
   {
     type: 'list',
@@ -42,7 +42,7 @@ inquirer.prompt([
       return !(answersSoFar.inputType.endsWith('int') && Number.isNaN(parseInt(newValue))) || 'Please enter an integer';
     }
   }
-]).then(answers => {
+]).then((answers) => {
   const existingFile = fs.readFileSync(answers.filename);
   if (answers.inputType === '8-bit int') existingFile.writeUInt8(answers.newValue, answers.offset);
   else if (answers.inputType === '16-bit int') existingFile.writeUInt16LE(answers.newValue, answers.offset);

@@ -8,7 +8,7 @@
     "array-callback-return": 1,
     "arrow-parens": [
       1,
-      "as-needed"
+      "always"
     ],
     "arrow-spacing": 1,
     "block-spacing": [

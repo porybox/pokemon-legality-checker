@@ -8,7 +8,7 @@ const legalityCheck = require('..');
 
 describe('pokemon-legality-checker', () => {
   describe('checking legal Pokémon', () => {
-    fs.readdirSync(`${__dirname}/pk6/legal`).filter(filename => filename.endsWith('.pk6')).forEach(filename => {
+    fs.readdirSync(`${__dirname}/pk6/legal`).filter((filename) => filename.endsWith('.pk6')).forEach((filename) => {
       it(`should classify ${filename} as legal`, () => {
         const parsedFile = pk6parse.parseFile(`${__dirname}/pk6/legal/${filename}`, {parseNames: true});
         expect(legalityCheck(parsedFile)).to.eql(
@@ -19,7 +19,7 @@ describe('pokemon-legality-checker', () => {
     });
   });
   describe('checking illegal Pokémon', () => {
-    fs.readdirSync(`${__dirname}/pk6/illegal`).filter(filename => filename.endsWith('.pk6')).forEach(filename => {
+    fs.readdirSync(`${__dirname}/pk6/illegal`).filter((filename) => filename.endsWith('.pk6')).forEach((filename) => {
       it(`should classify ${filename} as illegal`, () => {
         const parsedFile = pk6parse.parseFile(`${__dirname}/pk6/illegal/${filename}`, {parseNames: true});
         const check = legalityCheck(parsedFile);

@@ -6,11 +6,16 @@ const pkparse = require('pkparse');
 
 const legalityCheck = require('..');
 
+const LEGAL_FILES = fs.readdirSync(`${__dirname}/pk6/legal`).concat(fs.readdirSync(`${__dirname}/pk7/legal`));
+const ILLEGAL_FILES = fs.readdirSync(`${__dirname}/pk6/illegal`).concat(fs.readdirSync(`${__dirname}/pk7/illegal`));
+
 describe('pokemon-legality-checker', () => {
   describe('checking legal Pokémon', () => {
-    fs.readdirSync(`${__dirname}/pk6/legal`).filter((filename) => filename.endsWith('.pk6')).forEach((filename) => {
+    LEGAL_FILES.filter((filename) => /\.pk[67]$/.test(filename)).forEach((filename) => {
       it(`should classify ${filename} as legal`, () => {
-        const parsedFile = pkparse.parseFile(`${__dirname}/pk6/legal/${filename}`, {parseNames: true});
+        const gen = +filename.slice(-1);
+        const filePath = `${__dirname}/pk${gen}/legal/${filename}`;
+        const parsedFile = pkparse.parseFile(filePath, {parseNames: true, gen});
         expect(legalityCheck(parsedFile)).to.eql(
           {isLegal: true, errors: []},
           `Incorrectly classifies the legal Pokémon ${filename} as illegal`
@@ -19,9 +24,11 @@ describe('pokemon-legality-checker', () => {
     });
   });
   describe('checking illegal Pokémon', () => {
-    fs.readdirSync(`${__dirname}/pk6/illegal`).filter((filename) => filename.endsWith('.pk6')).forEach((filename) => {
+    ILLEGAL_FILES.filter((filename) => /\.pk[67]$/.test(filename)).forEach((filename) => {
       it(`should classify ${filename} as illegal`, () => {
-        const parsedFile = pkparse.parseFile(`${__dirname}/pk6/illegal/${filename}`, {parseNames: true});
+        const gen = +filename.slice(-1);
+        const filePath = `${__dirname}/pk${gen}/illegal/${filename}`;
+        const parsedFile = pkparse.parseFile(filePath, {parseNames: true, gen});
         const check = legalityCheck(parsedFile);
         expect(check.isLegal).to.be.false(`Incorrectly classifies the illegal Pokémon ${filename} as legal`);
         expect(check.errors.length).to.not.be.equal(0);

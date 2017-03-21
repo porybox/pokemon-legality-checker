@@ -1,5 +1,7 @@
 # pokemon-legality-checker
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/porybox/pokemon-legality-checker.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/porybox/pokemon-legality-checker.svg?branch=master)](https://travis-ci.org/porybox/pokemon-legality-checker)
 
 In development; should not be considered stable yet.

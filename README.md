@@ -25,3 +25,15 @@ To run the tests:
 ```bash
 npm test
 ```
+
+## Test app
+
+This is very much a work in progress.
+
+To run the test app:
+
+```
+$ cd testapp
+$ npm install
+$ npm start
+```

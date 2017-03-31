@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "mocha"
+    "test": "mocha",
+    "test:app": "cd testapp && npm start"
   },
   "files": [
     "src/"
